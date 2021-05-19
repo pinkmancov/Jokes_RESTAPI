@@ -25,3 +25,19 @@ def create_app():
         from app.jokes.models import Joke
 
         db.create_all()
+
+        from app.main.routes import main
+        from app.users.routes import users
+        from app.jokes.routes import jokes
+        app.register_blueprint(main)
+        app.register_blueprint(users)
+        app.register_blueprint(jokes)
+
+        # Загрузка пользователя
+        @login.user_loader
+        def load_user(user_id):
+            if user_id is not None:
+                return db.session.query(User).get(int(user_id))
+            return None
+
+        return app
