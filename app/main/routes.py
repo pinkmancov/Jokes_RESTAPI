@@ -13,7 +13,7 @@ def home():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     else:
-        return render_template('')
+        return render_template('main/home.html')
 
 # Home Page URL Route
 @main.route('/index', methods=['GET'])
@@ -21,4 +21,4 @@ def home():
 def index():
     user_id = current_user.id
     jokes = db.session.query(Joke).filter(Joke.user_id == user_id).all()
-#    return render_template('', jokes=jokes)
+    return render_template('main/index.html', jokes=jokes)

@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th scope="col">Шутка</th>
+                <th scope="col">Текст шутки</th>
+                <th scope="col">Создана</th>
+                <th scope="col">Изменена</th>
+                <th scope="col">Действия</th>
+            </tr>
+            {% for joke in jokes %}
+                <tr class="data-hover">
+                    <td>{{ joke.title }}</td>
+                    <td>{{ joke.description }}</td>
+                    <td>{{ joke.created_by.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>
+                        {% if joke.updated_at %}
+                            {{ joke.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                        {% else %}{% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('jokes.update', joke_id=joke.id) }}" class="btn btn-primary btn-xs">Редактировать</a>
+                        <form action="{{ url_for('jokes.delete', joke_id=joke.id) }}" method="POST">
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

@@ -5,6 +5,7 @@ from wtforms.validators import InputRequired, EqualTo, ValidationError
 from app import db
 from app.users.models import User
 
+
 class LoginForm(FlaskForm):
     """Форма входа"""
 
@@ -12,6 +13,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[InputRequired()])
     remember_me = BooleanField('Запомнить меня', default=False)
     submit = SubmitField('Войти')
+
 
 class RegistrationForm(FlaskForm):
     """Форма регистрации"""
@@ -26,4 +28,6 @@ class RegistrationForm(FlaskForm):
 
     # функция проверки логина на совпадение
     def validate_username(self, username):
-        pass
+        user_object = db.session.query(User).filter_by(username=username.data).first()
+        if user_object:
+            raise ValidationError('Такое имя уже существует. Пожалуйста введите другое имя.')

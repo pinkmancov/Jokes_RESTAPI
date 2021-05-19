@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, url_for, request, abort
+from flask import Blueprint, flash, redirect, url_for, request, render_template
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash
 from werkzeug.urls import url_parse
@@ -28,17 +28,23 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('main.index')
         return redirect(next_page)
-#   return render_template('',form=login_form)
+    return render_template('auth/login.html', form=login_form)
 
 
 # User Logout
 @users.route('/logout', methods=['GET'])
 def logout():
-    pass
+    user = current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
+    logout_user()
+    flash("You have been logged out.", "success")
+    return redirect(url_for('main.home'))
 
 
 # User Registration
-@users.route('/registration', methods=['GET','POST'])
+@users.route('/registration', methods=['GET', 'POST'])
 def registration():
     reg_form = RegistrationForm()
 
@@ -58,4 +64,4 @@ def registration():
 
         flash("Спасибо! Теперь вы являетесь зарегистрированным пользователем", "Успешно")
         return redirect(url_for('users.login'))
-#   return render_template()
+    return render_template('auth/registration.html', form=reg_form)
