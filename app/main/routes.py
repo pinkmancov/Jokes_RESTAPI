@@ -1,5 +1,4 @@
 from flask import Blueprint, redirect, url_for, render_template, request, abort
-from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user, login_required
 
 from app import db
