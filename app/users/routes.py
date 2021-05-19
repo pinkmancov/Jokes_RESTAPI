@@ -59,9 +59,3 @@ def registration():
         flash("Спасибо! Теперь вы являетесь зарегистрированным пользователем", "Успешно")
         return redirect(url_for('users.login'))
 #   return render_template()
-
-# User account
-@users.route('/account')
-@login_required
-def account():
-    pass
