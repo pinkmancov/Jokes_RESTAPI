@@ -21,4 +21,7 @@ def create_app():
     login.init_app(app)
 
     with app.app_context():
-        pass
+        from app.users.models import User
+        from app.jokes.models import Joke
+
+        db.create_all()

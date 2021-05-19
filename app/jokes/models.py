@@ -15,4 +15,4 @@ class Joke(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
-        return "<Task {}>".format(self.title)
+        return "<Joke {}>".format(self.title)
