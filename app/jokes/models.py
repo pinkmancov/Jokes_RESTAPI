@@ -14,5 +14,5 @@ class Joke(db.Model):
     created_by = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __repr__(self):
-        return "<Joke {}>".format(self.title)
+    # def __repr__(self):
+    #     return "<Joke {}>".format(self.title)

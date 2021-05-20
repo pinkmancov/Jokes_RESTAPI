@@ -12,12 +12,12 @@
                         {{ render_field(form.password) }}
                         <p>{{ form.remember_me }} Запомнить меня</p>
                     </dl>
-                    <button type=submit class="btn btn-outline-info">Войти</button>
+                    <button type=submit class="btn">Войти</button>
                 </div>
             </form>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Новый пользователь? <a class="ml-2" href="{{ url_for('users.registration') }}">Регистрация</a>
+                    Нет учетной записи? <a class="ml-2" href="{{ url_for('users.registration') }}">Регистрация</a>
                 </small>
             </div>
         </div>

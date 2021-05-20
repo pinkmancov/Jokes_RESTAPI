@@ -56,14 +56,16 @@ def generation():
 @jokes.route('/joke/<int:joke_id>/update', methods=['GET', 'POST'])
 @login_required
 def update(joke_id):
-    # Проверка доступа
-    # if current_user.id == :
-    #     pass
-    # else:
-    #     return abort(403)
-
     joke = db.session.query(Joke).filter(Joke.id == joke_id).first()
+    joke_list = db.session.query(Joke).filter_by(user_id=current_user.id).all()
 
+    # Проверка доступа
+    if joke in joke_list:
+        pass
+    else:
+        return abort(403)
+
+    print(joke, joke_list)
     if request.method == 'POST':
         form_joke = JokeForm(formdata=request.form, obj=joke_id)
         form_joke.populate_obj(joke)
@@ -81,12 +83,6 @@ def update(joke_id):
 @jokes.route('/joke/<int:joke_id>/delete', methods=['POST'])
 @login_required
 def delete(joke_id):
-    # Проверка доступа
-    # if current_user.id == :
-    #     pass
-    # else:
-    #     return abort(403)
-
     joke = db.session.query(Joke).get_or_404(joke_id)
 
     try:
