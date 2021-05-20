@@ -3,10 +3,10 @@
     <div class="col-md-12">
         <table class="table table-striped">
             <tr>
-                <th scope="col">Шутка</th>
+                <th scope="col">Имя</th>
                 <th scope="col">Текст шутки</th>
-                <th scope="col">Создана</th>
-                <th scope="col">Изменена</th>
+                <th scope="col">Время добавления</th>
+                <th scope="col">Время последнего обновления</th>
                 <th scope="col">Действия</th>
             </tr>
             {% for joke in jokes %}
@@ -20,9 +20,9 @@
                         {% else %}{% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('jokes.update', joke_id=joke.id) }}" class="btn btn-primary btn-xs">Редактировать</a>
+                        <a href="{{ url_for('jokes.update', joke_id=joke.id) }}" class="btn">Редактировать</a>
                         <form action="{{ url_for('jokes.delete', joke_id=joke.id) }}" method="POST">
-                            <input class="btn btn-danger" type="submit" value="Delete">
+                            <input class="btn" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>

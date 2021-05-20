@@ -21,7 +21,7 @@ def login():
                 .filter_by(username=login_form.username.data).first()
         if user is None or not user \
                 .check_password(login_form.password.data):
-            flash("Неверное имя пользователя или пароль", "Внимание")
+            flash("Неверное имя пользователя или пароль")
             return redirect(url_for('users.login'))
         login_user(user, remember=login_form.remember_me.data)
         next_page = request.args.get('next')
@@ -39,7 +39,7 @@ def logout():
     db.session.add(user)
     db.session.commit()
     logout_user()
-    flash("You have been logged out.", "success")
+    flash("Вы вышли из системы")
     return redirect(url_for('main.home'))
 
 
@@ -62,6 +62,6 @@ def registration():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Спасибо! Теперь вы являетесь зарегистрированным пользователем", "Успешно")
+        flash("Спасибо! Теперь вы являетесь зарегистрированным пользователем")
         return redirect(url_for('users.login'))
     return render_template('auth/registration.html', form=reg_form)

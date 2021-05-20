@@ -12,6 +12,7 @@ login = LoginManager()
 login.login_view = 'users.login'
 login.login_message_category = 'info'
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -29,9 +30,11 @@ def create_app():
         from app.main.routes import main
         from app.users.routes import users
         from app.jokes.routes import jokes
+        from app.errors.handlers import errors
         app.register_blueprint(main)
         app.register_blueprint(users)
         app.register_blueprint(jokes)
+        app.register_blueprint(errors)
 
         # Загрузка пользователя
         @login.user_loader
@@ -39,5 +42,7 @@ def create_app():
             if user_id is not None:
                 return db.session.query(User).get(int(user_id))
             return None
+
+        from app import errors
 
         return app
