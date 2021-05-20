@@ -2,7 +2,7 @@
 {% block content %}
     <div class="col-md-6">
     <legend class="border-bottom mb-4">{{ legend }}</legend>
-        <form action="{{ url_for('jokes.create') }}" method="POST">
+        <form action="{{ url_for('jokes.joke', joke_id=joke.id) }}" method="GET">
             {% for field in form if field.widget.input_type != 'hidden' %}
                 <div class="form-group">
                     {{ form.hidden_tag() }}
@@ -10,7 +10,6 @@
                     {{ field(class='form-control') }}
                 </div>
             {% endfor %}
-            <button type="submit" class="btn">Добавить</button>
         </form>
     </div>
 {% endblock content %}

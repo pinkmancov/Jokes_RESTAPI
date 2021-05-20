@@ -4,10 +4,10 @@ from flask_login import current_user, login_required
 from app import db
 from app.jokes.models import Joke
 
-main = Blueprint('main',__name__)
+main = Blueprint('main', __name__)
 
 
-# Home Page URL Route
+# Маршрут домашней страницы
 @main.route('/', methods=['GET'])
 def home():
     if current_user.is_authenticated:
@@ -15,7 +15,8 @@ def home():
     else:
         return render_template('main/home.html')
 
-# Home Page URL Route
+
+# Маршрут домашней страницы
 @main.route('/index', methods=['GET'])
 @login_required
 def index():

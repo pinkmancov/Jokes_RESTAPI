@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, redirect, url_for, request, render_template
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash
 from werkzeug.urls import url_parse
 
@@ -10,7 +10,7 @@ from app.users.forms import LoginForm, RegistrationForm
 users = Blueprint('users', __name__)
 
 
-# User Login From URL Route
+# Маршрут входа пользователя
 @users.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
@@ -31,7 +31,7 @@ def login():
     return render_template('auth/login.html', form=login_form)
 
 
-# User Logout
+# Выход пользователя
 @users.route('/logout', methods=['GET'])
 def logout():
     user = current_user
@@ -43,7 +43,7 @@ def logout():
     return redirect(url_for('main.home'))
 
 
-# User Registration
+# Маршрут регистрации пользователя
 @users.route('/registration', methods=['GET', 'POST'])
 def registration():
     reg_form = RegistrationForm()

@@ -2,6 +2,7 @@ from datetime import datetime
 
 from app import db
 
+
 class Joke(db.Model):
     """Модель шутки"""
 
